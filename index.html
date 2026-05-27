@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shali Education Resources Limited | Study Abroad & Travel Consultancy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        bricolage: ['Bricolage Grotesque', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                        hand: ['Caveat', 'cursive'],
+                    },
+                    colors: {
+                        brand: {
+                            yellow: '#F9DB79',
+                            dark: '#2F2E2E',
+                            light: '#FDF1EC',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 6px }
+        ::-webkit-scrollbar-track { background: #fff }
+        ::-webkit-scrollbar-thumb { background: #ddd; border-radius: 10px }
+        ::-webkit-scrollbar-thumb:hover { background: #2F2E2E }
+
+        @keyframes marquee {
+            0% { transform: translateX(0) }
+            100% { transform: translateX(-50%) }
+        }
+        .animate-marquee { animation: marquee 30s linear infinite }
+
+        @keyframes spin-slow {
+            to { transform: rotate(360deg) }
+        }
+        .animate-spin-slow { animation: spin-slow 20s linear infinite }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) }
+            50% { transform: translateY(-20px) }
+        }
+        .animate-float { animation: float 6s ease-in-out infinite }
+
+        @keyframes float-delay {
+            0%, 100% { transform: translateY(0px) }
+            50% { transform: translateY(-15px) }
+        }
+        .animate-float-delay { animation: float-delay 5s ease-in-out 1s infinite }
+
+        @keyframes whatsapp-pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5) }
+            50% { box-shadow: 0 0 0 14px rgba(37, 211, 102, 0) }
+        }
+        .whatsapp-pulse { animation: whatsapp-pulse 2s ease-in-out infinite }
+
+        .noise-texture::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.1;
+            pointer-events: none;
+            border-radius: inherit;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .country-card:hover img {
+            transform: scale(1.1);
+        }
+
+        html { scroll-behavior: smooth }
+
+        .toast {
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .logo-img {
+            filter: drop-shadow(0 2px 8px rgba(249, 219, 121, 0.3));
+        }
+    </style>
+</head>
+<body class="bg-[#FAFAFA] font-inter text-brand-dark">
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast fixed bottom-6 right-6 z-[9999] bg-brand-dark text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-3">
+        <i data-lucide="check-circle" class="w-5 h-5 text-brand-yellow"></i>
+        <span id="toast-msg" class="text-sm font-medium">Message sent successfully!</span>
+    </div>
+
+    <!-- ==================== WHATSAPP FLOATING BUTTON ==================== -->
+    <a href="https://wa.link/m4ye46" target="_blank" rel="noopener noreferrer" class="whatsapp-pulse fixed bottom-6 right-6 z-[999] w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-transform duration-300" title="Chat with us on WhatsApp">
+        <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+
+    <!-- ==================== NAVIGATION ==================== -->
+    <nav id="navbar" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl transition-all duration-500">
+        <div class="backdrop-blur-xl bg-white/80 rounded-2xl md:rounded-full px-6 md:px-8 py-3 flex items-center justify-between" style="box-shadow: 0 8px 30px rgb(0 0 0 / 0.04)">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3">
+                <img src="https://z-cdn-media.chatglm.cn/files/0808f7e3-a1e8-4ed0-af37-9677a10766a0.jpeg?auth_key=1879883009-6236db1016b742619bfd327e0bcc7fa8-0-fe1d8a572b4955093f24c2a74064e39e" alt="Shali Education Resources Ltd" class="logo-img w-10 h-10 rounded-full object-cover">
+                <span class="font-bricolage font-semibold text-lg hidden sm:block">SHALI</span>
+            </a>
+
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex items-center gap-1">
+                <a href="#about" class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-brand-dark rounded-full hover:bg-gray-100 transition-all duration-300">About</a>
+                <a href="#services" class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-brand-dark rounded-full hover:bg-gray-100 transition-all duration-300">Services</a>
+                <a href="#destinations" class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-brand-dark rounded-full hover:bg-gray-100 transition-all duration-300">Destinations</a>
+                <a href="#process" class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-brand-dark rounded-full hover:bg-gray-100 transition-all duration-300">Process</a>
+                <a href="#testimonials" class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-brand-dark rounded-full hover:bg-gray-100 transition-all duration-300">Reviews</a>
+                <a href="#contact" class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-brand-dark rounded-full hover:bg-gray-100 transition-all duration-300">Contact</a>
+            </div>
+
+            <!-- CTA + Mobile -->
+            <div class="flex items-center gap-3">
+                <!-- WhatsApp Nav Button -->
+                <a href="https://wa.link/m4ye46" target="_blank" rel="noopener noreferrer" class="hidden md:flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider border border-[#25D366]/30 text-[#25D366] hover:bg-[#25D366] hover:text-white transition-all duration-300">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    WhatsApp
+                </a>
+                <a href="#contact" class="group relative overflow-hidden bg-brand-dark text-white px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 hover:scale-105 active:scale-95" style="box-shadow: 0 10px 15px -3px rgba(47,46,46,0.1)">
+                    <span class="relative z-10 group-hover:text-brand-dark transition-colors duration-300">Get Started</span>
+                    <div class="absolute inset-0 bg-brand-yellow translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"></div>
+                </a>
+                <button id="mobile-toggle" class="md:hidden p-2 rounded-xl hover:bg-gray-100 transition-colors">
+                    <i data-lucide="menu" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden mt-2 backdrop-blur-xl bg-white/95 rounded-2xl p-4 space-y-1" style="box-shadow: 0 8px 30px rgb(0 0 0 / 0.04)">
+            <a href="#about" class="block px-4 py-3 text-sm font-medium text-gray-600 hover:text-brand-dark hover:bg-gray-50 rounded-xl transition-all">About</a>
+            <a href="#services" class="block px-4 py-3 text-sm font-medium text-gray-600 hover:text-brand-dark hover:bg-gray-50 rounded-xl transition-all">Services</a>
+            <a href="#destinations" class="block px-4 py-3 text-sm font-medium text-gray-600 hover:text-brand-dark hover:bg-gray-50 rounded-xl transition-all">Destinations</a>
+            <a href="#process" class="block px-4 py-3 text-sm font-medium text-gray-600 hover:text-brand-dark hover:bg-gray-50 rounded-xl transition-all">Process</a>
+            <a href="#testimonials" class="block px-4 py-3 text-sm font-medium text-gray-600 hover:text-brand-dark hover:bg-gray-50 rounded-xl transition-all">Reviews</a>
+            <a href="#contact" class="block px-4 py-3 text-sm font-medium text-gray-600 hover:text-brand-dark hover:bg-gray-50 rounded-xl transition-all">Contact</a>
+            <a href="https://wa.link/m4ye46" target="_blank" class="flex items-center gap-2 px-4 py-3 text-sm font-semibold text-[#25D366] hover:bg-green-50 rounded-xl transition-all">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Message Us on WhatsApp
+            </a>
+        </div>
+    </nav>
+
+    <!-- ==================== HERO ==================== -->
+    <section class="relative min-h-[85vh] bg-brand-light overflow-hidden flex items-center">
+        <div class="absolute top-20 right-20 w-[500px] h-[500px] bg-brand-yellow/20 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-white/60 rounded-full blur-[80px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 md:px-8 py-32 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-8">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-white rounded-full border border-black/5">
+                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                        <span class="text-xs font-semibold uppercase tracking-widest text-gray-500">Now Accepting Applications</span>
+                    </div>
+
+                    <h1 class="font-bricolage font-semibold text-5xl md:text-7xl lg:text-8xl leading-[0.92] tracking-tight">
+                        Your Gateway<br>
+                        <span class="relative inline-block">
+                            to Global
+                            <svg class="absolute -bottom-2 left-0 w-full" viewBox="0 0 300 12" fill="none">
+                                <path d="M2 8C50 3 150 2 298 8" stroke="#F9DB79" stroke-width="4" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        <br>Education
+                    </h1>
+
+                    <p class="text-lg md:text-xl text-gray-500 max-w-xl leading-relaxed">
+                        Shali Education Resources Limited helps students achieve their international education goals with professional guidance, visa assistance, and personalized support every step of the way.
+                    </p>
+
+                    <div class="flex flex-wrap items-center gap-4">
+                        <a href="#contact" class="group relative overflow-hidden bg-brand-dark text-white px-8 py-4 rounded-full text-sm font-semibold uppercase tracking-wider transition-all duration-300 hover:scale-105 active:scale-95" style="box-shadow: 0 10px 15px -3px rgba(47,46,46,0.1)">
+                            <span class="relative z-10 group-hover:text-brand-dark transition-colors duration-300">Start Your Journey</span>
+                            <div class="absolute inset-0 bg-brand-yellow translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"></div>
+                        </a>
+                        <a href="https://wa.link/m4ye46" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-6 py-4 rounded-full text-sm font-semibold uppercase tracking-wider border border-[#25D366]/30 text-[#25D366] hover:bg-[#25D366] hover:text-white transition-all duration-300">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                            WhatsApp Us
+                        </a>
+                    </div>
+
+                    <div class="flex items-center gap-8 pt-4">
+                        <div>
+                            <div class="font-bricolage font-semibold text-3xl">500+</div>
+                            <div class="text-xs text-gray-400 uppercase tracking-wider">Students Placed</div>
+                        </div>
+                        <div class="w-px h-10 bg-black/10"></div>
+                        <div>
+                            <div class="font-bricolage font-semibold text-3xl">15+</div>
+                            <div class="text-xs text-gray-400 uppercase tracking-wider">Countries</div>
+                        </div>
+                        <div class="w-px h-10 bg-black/10"></div>
+                        <div>
+                            <div class="font-bricolage font-semibold text-3xl">98%</div>
+                            <div class="text-xs text-gray-400 uppercase tracking-wider">Visa Success</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Visual -->
+                <div class="lg:col-span-5 relative hidden lg:block">
+                    <div class="relative h-[520px]">
+                        <div class="absolute top-0 right-0 w-80 h-[420px] rounded-[32px] overflow-hidden border border-black/5 hover:-translate-y-4 transition-all duration-700 ease-out" style="box-shadow: 0 30px 80px rgba(0,0,0,0.12)">
+                            <img src="https://picsum.photos/seed/shali-hero-student/640/840.jpg" alt="Student studying abroad" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute bottom-12 left-0 bg-white rounded-2xl p-4 shadow-xl border border-black/5 animate-float z-10">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-green-600"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-semibold">Visa Approved!</div>
+                                    <div class="text-xs text-gray-400">Canada Study Visa</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute top-16 left-8 bg-white rounded-2xl p-3 shadow-xl border border-black/5 animate-float-delay z-10">
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 bg-brand-yellow/30 rounded-lg flex items-center justify-center">
+                                    <i data-lucide="plane" class="w-4 h-4 text-brand-dark"></i>
+                                </div>
+                                <span class="text-xs font-medium">Flight Booked</span>
+                            </div>
+                        </div>
+                        <div class="absolute -top-4 -right-4 w-24 h-24 animate-spin-slow">
+                            <svg viewBox="0 0 100 100" class="w-full h-full">
+                                <defs>
+                                    <path id="circle" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"/>
+                                </defs>
+                                <text class="fill-brand-dark text-[10px] font-semibold uppercase tracking-wider">
+                                    <textPath href="#circle">STUDY ABROAD • TRAVEL • EXPLORE • DREAM BIG • </textPath>
+                                </text>
+                            </svg>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <img src="https://z-cdn-media.chatglm.cn/files/0808f7e3-a1e8-4ed0-af37-9677a10766a0.jpeg?auth_key=1879883009-6236db1016b742619bfd327e0bcc7fa8-0-fe1d8a572b4955093f24c2a74064e39e" alt="Shali" class="w-10 h-10 rounded-full object-cover">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== MARQUEE ==================== -->
+    <div class="py-6 bg-white border-y border-black/5 overflow-hidden">
+        <div class="animate-marquee flex items-center gap-8 whitespace-nowrap">
+            <span class="text-2xl font-bricolage font-semibold bg-gradient-to-r from-brand-dark to-gray-400 bg-clip-text text-transparent">Study in UK</span>
+            <span class="text-brand-yellow text-2xl">✦</span>
+            <span class="text-2xl font-bricolage font-semibold bg-gradient-to-r from-brand-dark to-gray-400 bg-clip-text text-transparent">Study in Canada</span>
+            <span class="text-brand-yellow text-2xl">✦</span>
+            <span class="text-2xl font-bricolage font-semibold bg-gradient-to-r from-brand-dark to-gray-400 bg-clip-text text-transparent">Study in USA</span>
+            <span class="text-brand-yellow text-2xl">✦</span>
+            <span class="text-2xl font-bricolage font-semibold bg-gradient-to-r from-brand-dark to-gray-400 bg-clip-text text-transparent">Study in Australia</span>
+            <span class="text-brand-yellow text-2xl">✦</span>
+            <span class="text-2xl font-bricolage font-semibold bg-gradient-to-r from-brand-dark to-gray-400 bg-clip-text text-transparent">Study in Germany</span>
+            <span class="text-brand-yellow text-2xl">✦</span>
+            <span class="text-2xl font-bricolage font-semibold bg-gradient-to-r from-brand-dark to-gray-400 bg-clip-text text-transparent">Study in Ireland</span>
+            <span class="text-brand-yellow text-2xl">✦</span>
+            <span class="text-2xl font-bricolage font-semibold bg-gradient-to-r from-brand-dark to-gray-400 bg-clip-text text-transparent">Study in UK</span>
+            <span class="text-brand-yellow text-2xl">✦</span>
+            <span class="text-2xl font-bricolage font-semibold bg-gradient-to-r from-brand-dark to-gray-400 bg-clip-text text-transparent">Study in Canada</span>
+            <span class="text-brand-yellow text-2xl">✦</span>
+            <span class="text-2xl font-bricolage font-semibold bg-gradient-to-r from-brand-dark to-gray-400 bg-clip-text text-transparent">Study in USA</span>
+            <span class="text-brand-yellow text-2xl">✦</span>
+            <span class="text-2xl font-bricolage font-semibold bg-gradient-to-r from-brand-dark to-gray-400 bg-clip-text text-transparent">Study in Australia</span>
+            <span class="text-brand-yellow text-2xl">✦</span>
+            <span class="text-2xl font-bricolage font-semibold bg-gradient-to-r from-brand-dark to-gray-400 bg-clip-text text-transparent">Study in Germany</span>
+            <span class="text-brand-yellow text-2xl">✦</span>
+            <span class="text-2xl font-bricolage font-semibold bg-gradient-to-r from-brand-dark to-gray-400 bg-clip-text text-transparent">Study in Ireland</span>
+            <span class="text-brand-yellow text-2xl">✦</span>
+        </div>
+    </div>
+
+    <!-- ==================== ABOUT ==================== -->
+    <section id="about" class="py-24 md:py-32">
+        <div class="max-w-7xl mx-auto px-6 md:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="relative group">
+                    <div class="rounded-[32px] overflow-hidden border border-black/5" style="box-shadow: 0 30px 80px rgba(0,0,0,0.12)">
+                        <img src="https://picsum.photos/seed/shali-about-office/800/700.jpg" alt="Shali Education office" class="w-full h-[500px] object-cover group-hover:scale-105 transition-transform duration-1000">
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 bg-brand-yellow rounded-2xl p-6 shadow-xl flex items-center gap-4">
+                        <img src="https://z-cdn-media.chatglm.cn/files/0808f7e3-a1e8-4ed0-af37-9677a10766a0.jpeg?auth_key=1879883009-6236db1016b742619bfd327e0bcc7fa8-0-fe1d8a572b4955093f24c2a74064e39e" alt="Shali Logo" class="w-14 h-14 rounded-full object-cover border-2 border-white">
+                        <div>
+                            <div class="font-bricolage font-semibold text-2xl text-brand-dark">5+</div>
+                            <div class="text-sm font-medium text-brand-dark/70">Years of<br>Excellence</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-light rounded-full border border-black/5">
+                        <span class="text-xs font-semibold uppercase tracking-widest text-gray-500">About Us</span>
+                    </div>
+
+                    <h2 class="font-bricolage font-semibold text-4xl md:text-5xl tracking-tight leading-[1.1]">
+                        Empowering Students Through
+                        <span class="relative inline-block">
+                            Global Education
+                            <svg class="absolute -bottom-1 left-0 w-full" viewBox="0 0 300 12" fill="none">
+                                <path d="M2 8C80 3 220 2 298 8" stroke="#F9DB79" stroke-width="4" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                    </h2>
+
+                    <p class="text-gray-500 text-lg leading-relaxed">
+                        Shali Education Resources Limited is a trusted educational travel and study abroad consultancy dedicated to helping students achieve their international education goals. We provide professional guidance and personalized support for students seeking quality education opportunities abroad.
+                    </p>
+
+                    <p class="text-gray-500 leading-relaxed">
+                        Our services include study visa assistance, university and college application support, admission processing, travel arrangements, flight reservations, accommodation guidance, and pre-departure support. We work closely with students and parents to simplify the entire process, ensuring a smooth transition from application to arrival at their destination.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-4 pt-4">
+                        <div class="flex items-start gap-3">
+                            <div class="w-5 h-5 rounded-full bg-brand-yellow flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <i data-lucide="check" class="w-3 h-3 text-brand-dark"></i>
+                            </div>
+                            <span class="text-sm font-medium">Professional Guidance</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-5 h-5 rounded-full bg-brand-yellow flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <i data-lucide="check" class="w-3 h-3 text-brand-dark"></i>
+                            </div>
+                            <span class="text-sm font-medium">Transparent Processes</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-5 h-5 rounded-full bg-brand-yellow flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <i data-lucide="check" class="w-3 h-3 text-brand-dark"></i>
+                            </div>
+                            <span class="text-sm font-medium">Expert Assistance</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-5 h-5 rounded-full bg-brand-yellow flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <i data-lucide="check" class="w-3 h-3 text-brand-dark"></i>
+                            </div>
+                            <span class="text-sm font-medium">Personalized Support</span>
+                        </div>
+                    </div>
+
+                    <a href="#services" class="group relative overflow-hidden inline-flex items-center gap-2 bg-brand-dark text-white px-8 py-4 rounded-full text-sm font-semibold uppercase tracking-wider mt-4 hover:scale-105 active:scale-95 transition-all duration-300" style="box-shadow: 0 10px 15px -3px rgba(47,46,46,0.1)">
+                        <span class="relative z-10 group-hover:text-brand-dark transition-colors duration-300">Explore Services</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4 relative z-10 group-hover:text-brand-dark transition-colors duration-300"></i>
+                        <div class="absolute inset-0 bg-brand-yellow translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SERVICES ==================== -->
+    <section id="services" class="py-24 md:py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-6 md:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-light rounded-full border border-black/5 mb-6">
+                    <span class="text-xs font-semibold uppercase tracking-widest text-gray-500">Our Services</span>
+                </div>
+                <h2 class="font-bricolage font-semibold text-4xl md:text-5xl tracking-tight leading-[1.1] mb-4">
+                    Comprehensive Support for
+                    <span class="relative inline-block">
+                        Your Journey
+                        <svg class="absolute -bottom-1 left-0 w-full" viewBox="0 0 300 12" fill="none">
+                            <path d="M2 8C80 3 220 2 298 8" stroke="#F9DB79" stroke-width="4" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+                </h2>
+                <p class="text-gray-500 text-lg">From application to arrival, we've got every step covered with our comprehensive range of services.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="service-card group bg-[#F5F5F5] rounded-[32px] p-10 hover:shadow-2xl hover:-translate-y-4 transition-all duration-500 cursor-pointer">
+                    <div class="service-icon w-14 h-14 bg-brand-light rounded-2xl flex items-center justify-center mb-6 transition-transform duration-300">
+                        <i data-lucide="file-check" class="w-6 h-6 text-brand-dark"></i>
+                    </div>
+                    <h3 class="font-bricolage font-semibold text-xl mb-3">Study Visa Assistance</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Expert guidance through the entire visa application process, documentation preparation, and interview coaching to maximize your approval chances.</p>
+                </div>
+
+                <div class="service-card group bg-[#F5F5F5] rounded-[32px] p-10 hover:shadow-2xl hover:-translate-y-4 transition-all duration-500 cursor-pointer">
+                    <div class="service-icon w-14 h-14 bg-brand-light rounded-2xl flex items-center justify-center mb-6 transition-transform duration-300">
+                        <i data-lucide="school" class="w-6 h-6 text-brand-dark"></i>
+                    </div>
+                    <h3 class="font-bricolage font-semibold text-xl mb-3">University Applications</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Personalized support for university and college applications, including course selection, personal statement review, and submission tracking.</p>
+                </div>
+
+                <div class="service-card group bg-[#F5F5F5] rounded-[32px] p-10 hover:shadow-2xl hover:-translate-y-4 transition-all duration-500 cursor-pointer">
+                    <div class="service-icon w-14 h-14 bg-brand-light rounded-2xl flex items-center justify-center mb-6 transition-transform duration-300">
+                        <i data-lucide="plane" class="w-6 h-6 text-brand-dark"></i>
+                    </div>
+                    <h3 class="font-bricolage font-semibold text-xl mb-3">Travel Arrangements</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Complete travel planning including flight reservations, airport pickup coordination, and itinerary management for a stress-free departure.</p>
+                </div>
+
+                <div class="service-card group bg-[#F5F5F5] rounded-[32px] p-10 hover:shadow-2xl hover:-translate-y-4 transition-all duration-500 cursor-pointer">
+                    <div class="service-icon w-14 h-14 bg-brand-light rounded-2xl flex items-center justify-center mb-6 transition-transform duration-300">
+                        <i data-lucide="home" class="w-6 h-6 text-brand-dark"></i>
+                    </div>
+                    <h3 class="font-bricolage font-semibold text-xl mb-3">Accommodation Guidance</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Assistance finding safe, affordable housing near your institution — from student dormitories to private rentals and homestay options.</p>
+                </div>
+
+                <div class="service-card group bg-[#F5F5F5] rounded-[32px] p-10 hover:shadow-2xl hover:-translate-y-4 transition-all duration-500 cursor-pointer">
+                    <div class="service-icon w-14 h-14 bg-brand-light rounded-2xl flex items-center justify-center mb-6 transition-transform duration-300">
+                        <i data-lucide="clipboard-check" class="w-6 h-6 text-brand-dark"></i>
+                    </div>
+                    <h3 class="font-bricolage font-semibold text-xl mb-3">Admission Processing</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">End-to-end admission processing support including document verification, application tracking, and offer letter procurement.</p>
+                </div>
+
+                <div class="service-card group bg-[#F5F5F5] rounded-[32px] p-10 hover:shadow-2xl hover:-translate-y-4 transition-all duration-500 cursor-pointer">
+                    <div class="service-icon w-14 h-14 bg-brand-light rounded-2xl flex items-center justify-center mb-6 transition-transform duration-300">
+                        <i data-lucide="luggage" class="w-6 h-6 text-brand-dark"></i>
+                    </div>
+                    <h3 class="font-bricolage font-semibold text-xl mb-3">Pre-Departure Support</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Comprehensive pre-departure orientation covering cultural preparation, packing essentials, financial planning, and what to expect abroad.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== VIDEO SECTION ==================== -->
+    <section class="py-24 md:py-32 bg-brand-dark relative overflow-hidden noise-texture">
+        <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-brand-yellow/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 md:px-8 relative z-10">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 rounded-full border border-white/10 mb-6">
+                    <span class="text-xs font-semibold uppercase tracking-widest text-white/60">Watch Our Story</span>
+                </div>
+                <h2 class="font-bricolage font-semibold text-4xl md:text-5xl tracking-tight leading-[1.1] text-white mb-4">
+                    See How We Transform
+                    <span class="text-brand-yellow">Dreams Into Reality</span>
+                </h2>
+                <p class="text-white/50 text-lg">Discover how Shali Education Resources Limited guides students through every step of their international education journey.</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="rounded-[32px] overflow-hidden border border-white/10" style="box-shadow: 0 30px 80px rgba(0,0,0,0.4)">
+                    <div class="relative w-full" style="padding-bottom: 56.25%;">
+                        <iframe 
+                            class="absolute top-0 left-0 w-full h-full"
+                            width="848" height="480"
+                            src="https://www.youtube.com/embed/vPssM_aPE80" 
+                            title="@Live and Study in Europe with Shali Education Resources"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== DESTINATIONS ==================== -->
+    <section id="destinations" class="py-24 md:py-32">
+        <div class="max-w-7xl mx-auto px-6 md:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-light rounded-full border border-black/5 mb-6">
+                    <span class="text-xs font-semibold uppercase tracking-widest text-gray-500">Popular Destinations</span>
+                </div>
+                <h2 class="font-bricolage font-semibold text-4xl md:text-5xl tracking-tight leading-[1.1] mb-4">
+                    Study in the World's
+                    <span class="relative inline-block">
+                        Best Countries
+                        <svg class="absolute -bottom-1 left-0 w-full" viewBox="0 0 300 12" fill="none">
+                            <path d="M2 8C80 3 220 2 298 8" stroke="#F9DB79" stroke-width="4" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+                </h2>
+                <p class="text-gray-500 text-lg">Explore top study destinations with world-class education systems and vibrant student life.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="country-card group rounded-[32px] overflow-hidden relative cursor-pointer" style="box-shadow: 0 30px 80px rgba(0,0,0,0.12)">
+                    <div class="aspect-[4/5] overflow-hidden">
+                        <img src="https://picsum.photos/seed/shali-uk-london/600/750.jpg" alt="United Kingdom" class="w-full h-full object-cover transition-transform duration-1000">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-8">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-2xl">🇬🇧</span>
+                            <h3 class="font-bricolage font-semibold text-2xl text-white">United Kingdom</h3>
+                        </div>
+                        <p class="text-white/70 text-sm mb-3">Home to Oxford, Cambridge, and world-renowned institutions.</p>
+                        <div class="flex items-center gap-2 text-brand-yellow text-sm font-semibold group-hover:gap-4 transition-all duration-300">
+                            <span>Explore Programs</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="country-card group rounded-[32px] overflow-hidden relative cursor-pointer" style="box-shadow: 0 30px 80px rgba(0,0,0,0.12)">
+                    <div class="aspect-[4/5] overflow-hidden">
+                        <img src="https://picsum.photos/seed/shali-canada-toronto/600/750.jpg" alt="Canada" class="w-full h-full object-cover transition-transform duration-1000">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-8">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-2xl">🇨🇦</span>
+                            <h3 class="font-bricolage font-semibold text-2xl text-white">Canada</h3>
+                        </div>
+                        <p class="text-white/70 text-sm mb-3">Affordable education with post-study work opportunities.</p>
+                        <div class="flex items-center gap-2 text-brand-yellow text-sm font-semibold group-hover:gap-4 transition-all duration-300">
+                            <span>Explore Programs</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="country-card group rounded-[32px] overflow-hidden relative cursor-pointer" style="box-shadow: 0 30px 80px rgba(0,0,0,0.12)">
+                    <div class="aspect-[4/5] overflow-hidden">
+                        <img src="https://picsum.photos/seed/shali-usa-newyork/600/750.jpg" alt="United States" class="w-full h-full object-cover transition-transform duration-1000">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-8">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-2xl">🇺🇸</span>
+                            <h3 class="font-bricolage font-semibold text-2xl text-white">United States</h3>
+                        </div>
+                        <p class="text-white/70 text-sm mb-3">Ivy League schools and cutting-edge research opportunities.</p>
+                        <div class="flex items-center gap-2 text-brand-yellow text-sm font-semibold group-hover:gap-4 transition-all duration-300">
+                            <span>Explore Programs</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="country-card group rounded-[32px] overflow-hidden relative cursor-pointer" style="box-shadow: 0 30px 80px rgba(0,0,0,0.12)">
+                    <div class="aspect-[4/5] overflow-hidden">
+                        <img src="https://picsum.photos/seed/shali-australia-sydney/600/750.jpg" alt="Australia" class="w-full h-full object-cover transition-transform duration-1000">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-8">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-2xl">🇦🇺</span>
+                            <h3 class="font-bricolage font-semibold text-2xl text-white">Australia</h3>
+                        </div>
+                        <p class="text-white/70 text-sm mb-3">Top QS-ranked universities with vibrant student cities.</p>
+                        <div class="flex items-center gap-2 text-brand-yellow text-sm font-semibold group-hover:gap-4 transition-all duration-300">
+                            <span>Explore Programs</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="country-card group rounded-[32px] overflow-hidden relative cursor-pointer" style="box-shadow: 0 30px 80px rgba(0,0,0,0.12)">
+                    <div class="aspect-[4/5] overflow-hidden">
+                        <img src="https://picsum.photos/seed/shali-germany-berlin/600/750.jpg" alt="Germany" class="w-full h-full object-cover transition-transform duration-1000">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-8">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-2xl">🇩🇪</span>
+                            <h3 class="font-bricolage font-semibold text-2xl text-white">Germany</h3>
+                        </div>
+                        <p class="text-white/70 text-sm mb-3">Tuition-free education at public universities for international students.</p>
+                        <div class="flex items-center gap-2 text-brand-yellow text-sm font-semibold group-hover:gap-4 transition-all duration-300">
+                            <span>Explore Programs</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="country-card group rounded-[32px] overflow-hidden relative cursor-pointer" style="box-shadow: 0 30px 80px rgba(0,0,0,0.12)">
+                    <div class="aspect-[4/5] overflow-hidden">
+                        <img src="https://picsum.photos/seed/shali-ireland-dublin/600/750.jpg" alt="Ireland" class="w-full h-full object-cover transition-transform duration-1000">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-8">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-2xl">🇮🇪</span>
+                            <h3 class="font-bricolage font-semibold text-2xl text-white">Ireland</h3>
+                        </div>
+                        <p class="text-white/70 text-sm mb-3">English-speaking education with strong tech industry connections.</p>
+                        <div class="flex items-center gap-2 text-brand-yellow text-sm font-semibold group-hover:gap-4 transition-all duration-300">
+                            <span>Explore Programs</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PROCESS ==================== -->
+    <section id="process" class="py-24 md:py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-6 md:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-light rounded-full border border-black/5 mb-6">
+                    <span class="text-xs font-semibold uppercase tracking-widest text-gray-500">How It Works</span>
+                </div>
+                <h2 class="font-bricolage font-semibold text-4xl md:text-5xl tracking-tight leading-[1.1] mb-4">
+                    Your Journey in
+                    <span class="relative inline-block">
+                        4 Simple Steps
+                        <svg class="absolute -bottom-1 left-0 w-full" viewBox="0 0 300 12" fill="none">
+                            <path d="M2 8C80 3 220 2 298 8" stroke="#F9DB79" stroke-width="4" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+                </h2>
+                <p class="text-gray-500 text-lg">We make studying abroad simple with our proven step-by-step process.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="relative text-center">
+                    <div class="w-16 h-16 bg-brand-yellow rounded-2xl flex items-center justify-center mx-auto mb-6 rotate-6 hover:rotate-0 transition-transform duration-300">
+                        <span class="font-bricolage font-semibold text-2xl text-brand-dark">01</span>
+                    </div>
+                    <h3 class="font-bricolage font-semibold text-xl mb-3">Free Consultation</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Book a free session with our experts to discuss your academic goals, budget, and preferred destinations.</p>
+                    <div class="hidden lg:block absolute top-8 left-[calc(50%+40px)] w-[calc(100%-80px)] border-t-2 border-dashed border-brand-yellow/40"></div>
+                </div>
+
+                <div class="relative text-center">
+                    <div class="w-16 h-16 bg-brand-light rounded-2xl flex items-center justify-center mx-auto mb-6 -rotate-3 hover:rotate-0 transition-transform duration-300">
+                        <span class="font-bricolage font-semibold text-2xl text-brand-dark">02</span>
+                    </div>
+                    <h3 class="font-bricolage font-semibold text-xl mb-3">Application & Visa</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">We handle your university applications, documentation, and visa processing with meticulous attention to detail.</p>
+                    <div class="hidden lg:block absolute top-8 left-[calc(50%+40px)] w-[calc(100%-80px)] border-t-2 border-dashed border-brand-yellow/40"></div>
+                </div>
+
+                <div class="relative text-center">
+                    <div class="w-16 h-16 bg-brand-yellow rounded-2xl flex items-center justify-center mx-auto mb-6 rotate-3 hover:rotate-0 transition-transform duration-300">
+                        <span class="font-bricolage font-semibold text-2xl text-brand-dark">03</span>
+                    </div>
+                    <h3 class="font-bricolage font-semibold text-xl mb-3">Travel & Accommodation</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">We arrange your flights, airport pickup, and help secure comfortable accommodation near your institution.</p>
+                    <div class="hidden lg:block absolute top-8 left-[calc(50%+40px)] w-[calc(100%-80px)] border-t-2 border-dashed border-brand-yellow/40"></div>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-brand-light rounded-2xl flex items-center justify-center mx-auto mb-6 -rotate-6 hover:rotate-0 transition-transform duration-300">
+                        <span class="font-bricolage font-semibold text-2xl text-brand-dark">04</span>
+                    </div>
+                    <h3 class="font-bricolage font-semibold text-xl mb-3">Arrive & Thrive</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Land in your destination country fully prepared. We provide ongoing support even after you've settled in.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== STATS ==================== -->
+    <section class="py-20 bg-brand-light">
+        <div class="max-w-7xl mx-auto px-6 md:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="font-bricolage font-semibold text-5xl md:text-6xl tracking-tight text-brand-dark">500<span class="text-brand-yellow">+</span></div>
+                    <div class="text-sm text-gray-500 mt-2 uppercase tracking-wider font-medium">Students Placed</div>
+                </div>
+                <div class="text-center">
+                    <div class="font-bricolage font-semibold text-5xl md:text-6xl tracking-tight text-brand-dark">15<span class="text-brand-yellow">+</span></div>
+                    <div class="text-sm text-gray-500 mt-2 uppercase tracking-wider font-medium">Countries</div>
+                </div>
+                <div class="text-center">
+                    <div class="font-bricolage font-semibold text-5xl md:text-6xl tracking-tight text-brand-dark">50<span class="text-brand-yellow">+</span></div>
+                    <div class="text-sm text-gray-500 mt-2 uppercase tracking-wider font-medium">Partner Institutions</div>
+                </div>
+                <div class="text-center">
+                    <div class="font-bricolage font-semibold text-5xl md:text-6xl tracking-tight text-brand-dark">98<span class="text-brand-yellow">%</span></div>
+                    <div class="text-sm text-gray-500 mt-2 uppercase tracking-wider font-medium">Visa Success Rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== WHY CHOOSE US ==================== -->
+    <section class="py-24 md:py-32">
+        <div class="max-w-7xl mx-auto px-6 md:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-6 order-2 lg:order-1">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-light rounded-full border border-black/5">
+                        <span class="text-xs font-semibold uppercase tracking-widest text-gray-500">Why Choose Us</span>
+                    </div>
+
+                    <h2 class="font-bricolage font-semibold text-4xl md:text-5xl tracking-tight leading-[1.1]">
+                        Your Trusted Partner for
+                        <span class="relative inline-block">
+                            International Education
+                            <svg class="absolute -bottom-1 left-0 w-full" viewBox="0 0 300 12" fill="none">
+                                <path d="M2 8C80 3 220 2 298 8" stroke="#F9DB79" stroke-width="4" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                    </h2>
+
+                    <p class="text-gray-500 text-lg leading-relaxed">At Shali Education Resources Limited, we understand that studying abroad is a life-changing opportunity. That is why we are committed to offering reliable information, transparent processes, and expert assistance tailored to each student's needs.</p>
+
+                    <div class="space-y-4 pt-4">
+                        <div class="flex items-start gap-4 p-4 rounded-2xl hover:bg-white hover:shadow-lg transition-all duration-300">
+                            <div class="w-12 h-12 bg-brand-yellow/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="shield-check" class="w-6 h-6 text-brand-dark"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg mb-1">Professionalism & Integrity</h4>
+                                <p class="text-gray-500 text-sm">We uphold the highest standards of professionalism and ethical practice in every interaction.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 rounded-2xl hover:bg-white hover:shadow-lg transition-all duration-300">
+                            <div class="w-12 h-12 bg-brand-yellow/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="heart-handshake" class="w-6 h-6 text-brand-dark"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg mb-1">Personalized Approach</h4>
+                                <p class="text-gray-500 text-sm">Every student is unique. We tailor our services to your academic goals, career aspirations, and financial considerations.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 rounded-2xl hover:bg-white hover:shadow-lg transition-all duration-300">
+                            <div class="w-12 h-12 bg-brand-yellow/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="clock" class="w-6 h-6 text-brand-dark"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg mb-1">End-to-End Support</h4>
+                                <p class="text-gray-500 text-sm">From your first consultation to landing abroad, we're with you at every step of the journey.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 rounded-2xl hover:bg-white hover:shadow-lg transition-all duration-300">
+                            <div class="w-12 h-12 bg-brand-yellow/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="badge-check" class="w-6 h-6 text-brand-dark"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg mb-1">Proven Track Record</h4>
+                                <p class="text-gray-500 text-sm">98% visa success rate and 500+ students successfully placed in institutions worldwide.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative order-1 lg:order-2">
+                    <div class="rounded-[32px] overflow-hidden" style="box-shadow: 0 30px 80px rgba(0,0,0,0.12)">
+                        <img src="https://picsum.photos/seed/shali-why-team/700/800.jpg" alt="Our team helping students" class="w-full h-[600px] object-cover">
+                    </div>
+                    <div class="absolute -bottom-6 -left-6 bg-white rounded-2xl p-5 shadow-xl border border-black/5 animate-float">
+                        <div class="flex items-center gap-3">
+                            <img src="https://z-cdn-media.chatglm.cn/files/0808f7e3-a1e8-4ed0-af37-9677a10766a0.jpeg?auth_key=1879883009-6236db1016b742619bfd327e0bcc7fa8-0-fe1d8a572b4955093f24c2a74064e39e" alt="Shali Logo" class="w-12 h-12 rounded-full object-cover border-2 border-brand-yellow">
+                            <div>
+                                <div class="font-bricolage font-semibold text-xl">Award Winning</div>
+                                <div class="text-xs text-gray-400">Best Education Consultancy</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TESTIMONIALS ==================== -->
+    <section id="testimonials" class="py-24 md:py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-6 md:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-light rounded-full border border-black/5 mb-6">
+                    <span class="text-xs font-semibold uppercase tracking-widest text-gray-500">Testimonials</span>
+                </div>
+                <h2 class="font-bricolage font-semibold text-4xl md:text-5xl tracking-tight leading-[1.1] mb-4">
+                    What Our Students
+                    <span class="relative inline-block">
+                        Are Saying
+                        <svg class="absolute -bottom-1 left-0 w-full" viewBox="0 0 300 12" fill="none">
+                            <path d="M2 8C80 3 220 2 298 8" stroke="#F9DB79" stroke-width="4" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+                </h2>
+                <p class="text-gray-500 text-lg">Real stories from students who achieved their dreams through Shali Education Resources Limited.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-[#F5F5F5] rounded-[32px] p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-500">
+                    <div class="flex items-center gap-1 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 fill-brand-yellow text-brand-yellow"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-brand-yellow text-brand-yellow"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-brand-yellow text-brand-yellow"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-brand-yellow text-brand-yellow"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-brand-yellow text-brand-yellow"></i>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-6">"Shali Education made my dream of studying in Canada a reality. From visa processing to accommodation, everything was handled seamlessly. I couldn't have done it without their expert guidance!"</p>
+                    <div class="flex items-center gap-3">
+                        <img src="https://picsum.photos/seed/shali-test1/100/100.jpg" alt="Student" class="w-12 h-12 rounded-full object-cover border-2 border-white">
+                        <div>
+                            <div class="font-semibold text-sm">Adewale Okonkwo</div>
+                            <div class="text-xs text-gray-400">University of Toronto, Canada</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-brand-dark rounded-[32px] p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-500 relative overflow-hidden noise-texture">
+                    <div class="flex items-center gap-1 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 fill-brand-yellow text-brand-yellow"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-brand-yellow text-brand-yellow"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-brand-yellow text-brand-yellow"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-brand-yellow text-brand-yellow"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-brand-yellow text-brand-yellow"></i>
+                    </div>
+                    <p class="text-white/80 text-sm leading-relaxed mb-6 relative z-10">"I was overwhelmed by the process of applying to UK universities until I found Shali Education. Their team was incredibly supportive and helped me secure admission and visa without any stress."</p>
+                    <div class="flex items-center gap-3 relative z-10">
+                        <img src="https://picsum.photos/seed/shali-test2/100/100.jpg" alt="Student" class="w-12 h-12 rounded-full object-cover border-2 border-white/20">
+                        <div>
+                            <div class="font-semibold text-sm text-white">Fatima Ibrahim</div>
+                            <div class="text-xs text-white/50">University of Manchester, UK</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#F5F5F5] rounded-[32px] p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-500">
+                    <div class="flex items-center gap-1 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 fill-brand-yellow text-brand-yellow"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-brand-yellow text-brand-yellow"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-brand-yellow text-brand-yellow"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-brand-yellow text-brand-yellow"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-brand-yellow text-brand-yellow"></i>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-6">"The pre-departure orientation was so helpful! I felt completely prepared when I landed in Australia. Shali Education even helped me find part-time work opportunities. Truly exceptional service!"</p>
+                    <div class="flex items-center gap-3">
+                        <img src="https://picsum.photos/seed/shali-test3/100/100.jpg" alt="Student" class="w-12 h-12 rounded-full object-cover border-2 border-white">
+                        <div>
+                            <div class="font-semibold text-sm">Chinedu Eze</div>
+                            <div class="text-xs text-gray-400">Monash University, Australia</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== MISSION / CTA ==================== -->
+    <section class="py-24 md:py-32 bg-brand-light relative overflow-hidden">
+        <div class="absolute -top-20 -right-20 w-[500px] h-[500px] bg-brand-yellow/10 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute -bottom-20 -left-20 w-[400px] h-[400px] bg-white/60 rounded-full blur-[80px] pointer-events-none"></div>
+
+        <div class="max-w-5xl mx-auto px-6 md:px-8 text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-white rounded-full border border-black/5 mb-6">
+                <span class="text-xs font-semibold uppercase tracking-widest text-gray-500">Our Mission</span>
+            </div>
+
+            <h2 class="font-bricolage font-semibold text-4xl md:text-6xl tracking-tight leading-[1.05] mb-6">
+                Empowering Students Through
+                <span class="text-brand-yellow">Global Learning</span> Experiences
+            </h2>
+
+            <p class="text-gray-500 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed mb-10">
+                Our mission is to empower students through access to international education and trusted travel support, helping them build brighter futures. With a strong focus on professionalism, integrity, and customer satisfaction, we aim to connect students with global educational opportunities while making international travel safe, convenient, and stress-free.
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#contact" class="group relative overflow-hidden bg-brand-dark text-white px-8 py-4 rounded-full text-sm font-semibold uppercase tracking-wider hover:scale-105 active:scale-95 transition-all duration-300" style="box-shadow: 0 10px 15px -3px rgba(47,46,46,0.1)">
+                    <span class="relative z-10 group-hover:text-brand-dark transition-colors duration-300">Begin Your Journey</span>
+                    <div class="absolute inset-0 bg-brand-yellow translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"></div>
+                </a>
+                <a href="https://wa.link/m4ye46" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-8 py-4 rounded-full text-sm font-semibold uppercase tracking-wider border border-[#25D366]/30 text-[#25D366] hover:bg-[#25D366] hover:text-white transition-all duration-300 bg-white">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Chat on WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FAQ ==================== -->
+    <section class="py-24 md:py-32 bg-white">
+        <div class="max-w-3xl mx-auto px-6 md:px-8">
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-light rounded-full border border-black/5 mb-6">
+                    <span class="text-xs font-semibold uppercase tracking-widest text-gray-500">FAQ</span>
+                </div>
+                <h2 class="font-bricolage font-semibold text-4xl md:text-5xl tracking-tight leading-[1.1]">
+                    Frequently Asked
+                    <span class="relative inline-block">
+                        Questions
+                        <svg class="absolute -bottom-1 left-0 w-full" viewBox="0 0 300 12" fill="none">
+                            <path d="M2 8C80 3 220 2 298 8" stroke="#F9DB79" stroke-width="4" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+                </h2>
+            </div>
+
+            <div class="space-y-4" id="faq-container">
+                <div class="faq-item bg-[#F5F5F5] rounded-2xl overflow-hidden transition-all duration-300 hover:bg-white hover:shadow-lg">
+                    <button class="faq-toggle w-full flex items-center justify-between p-6 text-left" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-lg pr-4">How long does the visa process take?</span>
+                        <div class="w-8 h-8 bg-brand-yellow rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-300">
+                            <i data-lucide="plus" class="w-4 h-4 text-brand-dark"></i>
+                        </div>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6">
+                        <p class="text-gray-500 text-sm leading-relaxed">Processing times vary by country. Typically, study visa processing takes between 2-8 weeks depending on the destination country and time of year. We recommend starting the process at least 3-4 months before your intended departure date to allow ample time for document preparation and processing.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-[#F5F5F5] rounded-2xl overflow-hidden transition-all duration-300 hover:bg-white hover:shadow-lg">
+                    <button class="faq-toggle w-full flex items-center justify-between p-6 text-left" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-lg pr-4">What are the requirements for studying abroad?</span>
+                        <div class="w-8 h-8 bg-brand-yellow rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-300">
+                            <i data-lucide="plus" class="w-4 h-4 text-brand-dark"></i>
+                        </div>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6">
+                        <p class="text-gray-500 text-sm leading-relaxed">Requirements vary by country and institution, but typically include: a valid passport, academic transcripts, English proficiency test results (IELTS/TOEFL), statement of purpose, reference letters, proof of funds, and medical clearance. Our consultants will guide you through the specific requirements for your chosen destination.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-[#F5F5F5] rounded-2xl overflow-hidden transition-all duration-300 hover:bg-white hover:shadow-lg">
+                    <button class="faq-toggle w-full flex items-center justify-between p-6 text-left" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-lg pr-4">Do you offer scholarship assistance?</span>
+                        <div class="w-8 h-8 bg-brand-yellow rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-300">
+                            <i data-lucide="plus" class="w-4 h-4 text-brand-dark"></i>
+                        </div>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6">
+                        <p class="text-gray-500 text-sm leading-relaxed">Yes! We help students identify and apply for scholarships, grants, and bursaries available at their chosen institutions. We also provide guidance on government-sponsored scholarship programs and external funding opportunities that can significantly reduce your education costs.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-[#F5F5F5] rounded-2xl overflow-hidden transition-all duration-300 hover:bg-white hover:shadow-lg">
+                    <button class="faq-toggle w-full flex items-center justify-between p-6 text-left" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-lg pr-4">Can I work while studying abroad?</span>
+                        <div class="w-8 h-8 bg-brand-yellow rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-300">
+                            <i data-lucide="plus" class="w-4 h-4 text-brand-dark"></i>
+                        </div>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6">
+                        <p class="text-gray-500 text-sm leading-relaxed">Most countries allow international students to work part-time during their studies. For example, the UK allows up to 20 hours per week, Canada allows 20 hours per week off-campus, and Australia permits 48 hours per fortnight. We provide detailed guidance on work regulations for your specific destination.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-[#F5F5F5] rounded-2xl overflow-hidden transition-all duration-300 hover:bg-white hover:shadow-lg">
+                    <button class="faq-toggle w-full flex items-center justify-between p-6 text-left" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-lg pr-4">What happens if my visa is rejected?</span>
+                        <div class="w-8 h-8 bg-brand-yellow rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-300">
+                            <i data-lucide="plus" class="w-4 h-4 text-brand-dark"></i>
+                        </div>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6">
+                        <p class="text-gray-500 text-sm leading-relaxed">While our visa success rate is 98%, we also prepare for every scenario. If a visa is rejected, we analyze the reasons, address the deficiencies in your application, and help you reapply with a stronger case. In some cases, we may suggest alternative destinations or institutions that better match your profile.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CONTACT ==================== -->
+    <section id="contact" class="py-24 md:py-32 bg-brand-dark relative overflow-hidden noise-texture">
+        <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-brand-yellow/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 md:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <div class="space-y-8">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 rounded-full border border-white/10">
+                        <span class="text-xs font-semibold uppercase tracking-widest text-white/60">Get In Touch</span>
+                    </div>
+
+                    <h2 class="font-bricolage font-semibold text-4xl md:text-5xl tracking-tight leading-[1.1] text-white">
+                        Ready to Start Your
+                        <span class="text-brand-yellow">International Journey?</span>
+                    </h2>
+
+                    <p class="text-white/50 text-lg leading-relaxed">Contact us today for a free consultation. Our expert counselors are ready to help you take the first step toward studying abroad.</p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-brand-yellow"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">Office Address</h4>
+                                <p class="text-white/50 text-sm">Lagos, Nigeria</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="mail" class="w-5 h-5 text-brand-yellow"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">Email Us</h4>
+                                <p class="text-white/50 text-sm">info@shalieducation.com</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="phone" class="w-5 h-5 text-brand-yellow"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">Call Us</h4>
+                                <a href="tel:+2348034921525" class="text-white/50 text-sm hover:text-brand-yellow transition-colors">+234 803 492 1525</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="clock" class="w-5 h-5 text-brand-yellow"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">Working Hours</h4>
+                                <p class="text-white/50 text-sm">Monday - Friday: 8AM - 6PM<br>Saturday: 9AM - 2PM</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WhatsApp CTA in Contact -->
+                    <a href="https://wa.link/m4ye46" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 px-6 py-4 bg-[#25D366] rounded-2xl text-white font-semibold hover:bg-[#20bd5a] transition-all duration-300 hover:scale-105 active:scale-95" style="box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3)">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        <span>Message Us on WhatsApp</span>
+                    </a>
+
+                    <!-- Social Links -->
+                    <div class="flex items-center gap-3 pt-2">
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-brand-yellow transition-all duration-300 group">
+                            <svg class="w-5 h-5 text-white group-hover:text-brand-dark transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-brand-yellow transition-all duration-300 group">
+                            <svg class="w-5 h-5 text-white group-hover:text-brand-dark transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12.017 24c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641 0 12.017 0z"/></svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-brand-yellow transition-all duration-300 group">
+                            <svg class="w-5 h-5 text-white group-hover:text-brand-dark transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-brand-yellow transition-all duration-300 group">
+                            <svg class="w-5 h-5 text-white group-hover:text-brand-dark transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="bg-white/5 backdrop-blur-sm rounded-[32px] p-8 md:p-10 border border-white/10">
+                    <h3 class="font-bricolage font-semibold text-2xl text-white mb-6">Send Us a Message</h3>
+                    <form id="contact-form" action="https://formspree.io/f/xnjrlaan" method="POST" class="space-y-5">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label class="text-white/50 text-xs uppercase tracking-wider font-medium mb-2 block">First Name</label>
+                                <input type="text" name="first_name" required placeholder="John" class="w-full px-5 py-3.5 bg-white/10 border border-white/10 rounded-xl text-white placeholder-white/30 text-sm focus:outline-none focus:border-brand-yellow/50 transition-colors">
+                            </div>
+                            <div>
+                                <label class="text-white/50 text-xs uppercase tracking-wider font-medium mb-2 block">Last Name</label>
+                                <input type="text" name="last_name" required placeholder="Doe" class="w-full px-5 py-3.5 bg-white/10 border border-white/10 rounded-xl text-white placeholder-white/30 text-sm focus:outline-none focus:border-brand-yellow/50 transition-colors">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-white/50 text-xs uppercase tracking-wider font-medium mb-2 block">Email Address</label>
+                            <input type="email" name="email" required placeholder="john@example.com" class="w-full px-5 py-3.5 bg-white/10 border border-white/10 rounded-xl text-white placeholder-white/30 text-sm focus:outline-none focus:border-brand-yellow/50 transition-colors">
+                        </div>
+                        <div>
+                            <label class="text-white/50 text-xs uppercase tracking-wider font-medium mb-2 block">Phone Number</label>
+                            <input type="tel" name="phone" placeholder="+234..." class="w-full px-5 py-3.5 bg-white/10 border border-white/10 rounded-xl text-white placeholder-white/30 text-sm focus:outline-none focus:border-brand-yellow/50 transition-colors">
+                        </div>
+                        <div>
+                            <label class="text-white/50 text-xs uppercase tracking-wider font-medium mb-2 block">Preferred Destination</label>
+                            <select name="destination" required class="w-full px-5 py-3.5 bg-white/10 border border-white/10 rounded-xl text-white/70 text-sm focus:outline-none focus:border-brand-yellow/50 transition-colors appearance-none cursor-pointer">
+                                <option value="" class="text-brand-dark">Select a country</option>
+                                <option value="uk" class="text-brand-dark">United Kingdom</option>
+                                <option value="canada" class="text-brand-dark">Canada</option>
+                                <option value="usa" class="text-brand-dark">United States</option>
+                                <option value="australia" class="text-brand-dark">Australia</option>
+                                <option value="germany" class="text-brand-dark">Germany</option>
+                                <option value="ireland" class="text-brand-dark">Ireland</option>
+                                <option value="other" class="text-brand-dark">Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="text-white/50 text-xs uppercase tracking-wider font-medium mb-2 block">Message</label>
+                            <textarea name="message" required rows="4" placeholder="Tell us about your study abroad goals..." class="w-full px-5 py-3.5 bg-white/10 border border-white/10 rounded-xl text-white placeholder-white/30 text-sm focus:outline-none focus:border-brand-yellow/50 transition-colors resize-none"></textarea>
+                        </div>
+                        <!-- Honeypot for spam -->
+                        <input type="text" name="_gotcha" style="display:none">
+                        <button type="submit" class="group relative overflow-hidden bg-brand-yellow text-brand-dark w-full px-8 py-4 rounded-xl text-sm font-semibold uppercase tracking-wider hover:scale-[1.02] active:scale-[0.98] transition-all duration-300">
+                            <span class="relative z-10 group-hover:text-white transition-colors duration-300">Send Message</span>
+                            <div class="absolute inset-0 bg-brand-dark translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"></div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="bg-brand-dark border-t border-white/5 relative noise-texture">
+        <div class="max-w-7xl mx-auto px-6 md:px-8 py-16 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <div class="lg:col-span-1">
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="https://z-cdn-media.chatglm.cn/files/0808f7e3-a1e8-4ed0-af37-9677a10766a0.jpeg?auth_key=1879883009-6236db1016b742619bfd327e0bcc7fa8-0-fe1d8a572b4955093f24c2a74064e39e" alt="Shali Education Resources Ltd" class="logo-img w-12 h-12 rounded-full object-cover">
+                        <div>
+                            <span class="font-bricolage font-semibold text-lg text-white block">SHALI</span>
+                            <span class="text-white/30 text-[10px] uppercase tracking-wider">Education Resources Ltd</span>
+                        </div>
+                    </div>
+                    <p class="text-white/40 text-sm leading-relaxed mb-4">Your trusted partner for international education and travel support. Building brighter futures through global learning.</p>
+                    <div class="font-hand text-brand-yellow text-lg">Building Brighter Futures ✦</div>
+                    <!-- WhatsApp in Footer -->
+                    <a href="https://wa.link/m4ye46" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-[#25D366]/10 rounded-xl text-[#25D366] text-sm font-medium hover:bg-[#25D366] hover:text-white transition-all duration-300">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        Chat with Us
+                    </a>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-white mb-4 text-sm uppercase tracking-wider">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#about" class="text-white/40 text-sm hover:text-brand-yellow transition-colors duration-300">About Us</a></li>
+                        <li><a href="#services" class="text-white/40 text-sm hover:text-brand-yellow transition-colors duration-300">Our Services</a></li>
+                        <li><a href="#destinations" class="text-white/40 text-sm hover:text-brand-yellow transition-colors duration-300">Destinations</a></li>
+                        <li><a href="#process" class="text-white/40 text-sm hover:text-brand-yellow transition-colors duration-300">How It Works</a></li>
+                        <li><a href="#testimonials" class="text-white/40 text-sm hover:text-brand-yellow transition-colors duration-300">Testimonials</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-white mb-4 text-sm uppercase tracking-wider">Services</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#services" class="text-white/40 text-sm hover:text-brand-yellow transition-colors duration-300">Study Visa Assistance</a></li>
+                        <li><a href="#services" class="text-white/40 text-sm hover:text-brand-yellow transition-colors duration-300">University Applications</a></li>
+                        <li><a href="#services" class="text-white/40 text-sm hover:text-brand-yellow transition-colors duration-300">Travel Arrangements</a></li>
+                        <li><a href="#services" class="text-white/40 text-sm hover:text-brand-yellow transition-colors duration-300">Accommodation Guidance</a></li>
+                        <li><a href="#services" class="text-white/40 text-sm hover:text-brand-yellow transition-colors duration-300">Pre-Departure Support</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-white mb-4 text-sm uppercase tracking-wider">Contact</h4>
+                    <ul class="space-y-3">
+                        <li class="text-white/40 text-sm flex items-center gap-2">
+                            <i data-lucide="phone" class="w-4 h-4 text-brand-yellow"></i>
+                            <a href="tel:+2348034921525" class="hover:text-brand-yellow transition-colors">+234 803 492 1525</a>
+                        </li>
+                        <li class="text-white/40 text-sm flex items-center gap-2">
+                            <i data-lucide="mail" class="w-4 h-4 text-brand-yellow"></i>
+                            <a href="mailto:info@shalieducation.com" class="hover:text-brand-yellow transition-colors">info@shalieducation.com</a>
+                        </li>
+                        <li class="text-white/40 text-sm flex items-center gap-2">
+                            <i data-lucide="map-pin" class="w-4 h-4 text-brand-yellow"></i>
+                            Lagos, Nigeria
+                        </li>
+                    </ul>
+                    <div class="mt-6">
+                        <h4 class="font-semibold text-white mb-3 text-sm uppercase tracking-wider">Newsletter</h4>
+                        <form onsubmit="handleNewsletter(event)" class="flex gap-2">
+                            <input type="email" required placeholder="Your email" class="flex-1 px-4 py-2.5 bg-white/10 border border-white/10 rounded-xl text-white placeholder-white/30 text-sm focus:outline-none focus:border-brand-yellow/50 transition-colors">
+                            <button type="submit" class="px-4 py-2.5 bg-brand-yellow rounded-xl hover:bg-brand-yellow/80 transition-colors">
+                                <i data-lucide="send" class="w-4 h-4 text-brand-dark"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <img src="https://z-cdn-media.chatglm.cn/files/0808f7e3-a1e8-4ed0-af37-9677a10766a0.jpeg?auth_key=1879883009-6236db1016b742619bfd327e0bcc7fa8-0-fe1d8a572b4955093f24c2a74064e39e" alt="Shali" class="w-6 h-6 rounded-full object-cover">
+                    <p class="text-white/30 text-sm">&copy; 2025 Shali Education Resources Limited. All rights reserved.</p>
+                </div>
+                <div class="flex items-center gap-6">
+                    <a href="#" class="text-white/30 text-sm hover:text-brand-yellow transition-colors duration-300">Privacy Policy</a>
+                    <a href="#" class="text-white/30 text-sm hover:text-brand-yellow transition-colors duration-300">Terms of Service</a>
+                    <a href="#" class="text-white/30 text-sm hover:text-brand-yellow transition-colors duration-300">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== BACK TO TOP ==================== -->
+    <button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="fixed bottom-6 left-6 z-50 w-12 h-12 bg-brand-dark text-white rounded-full flex items-center justify-center shadow-xl opacity-0 translate-y-4 transition-all duration-300 hover:bg-brand-yellow hover:text-brand-dark">
+        <i data-lucide="arrow-up" class="w-5 h-5"></i>
+    </button>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons({ attrs: { "stroke-width": 1.5 } });
+
+        // Mobile Menu Toggle
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('top-2');
+                navbar.classList.remove('top-4');
+            } else {
+                navbar.classList.remove('top-2');
+                navbar.classList.add('top-4');
+            }
+        });
+
+        // Back to top button
+        const backToTop = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTop.classList.remove('opacity-0', 'translate-y-4');
+                backToTop.classList.add('opacity-100', 'translate-y-0');
+            } else {
+                backToTop.classList.add('opacity-0', 'translate-y-4');
+                backToTop.classList.remove('opacity-100', 'translate-y-0');
+            }
+        });
+
+        // FAQ Toggle
+        function toggleFaq(btn) {
+            const content = btn.nextElementSibling;
+            const icon = btn.querySelector('.faq-toggle div');
+            const isOpen = !content.classList.contains('hidden');
+
+            document.querySelectorAll('.faq-content').forEach(c => c.classList.add('hidden'));
+            document.querySelectorAll('.faq-toggle div').forEach(i => i.style.transform = 'rotate(0deg)');
+
+            if (!isOpen) {
+                content.classList.remove('hidden');
+                icon.style.transform = 'rotate(45deg)';
+            }
+        }
+
+        // Toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const msg = document.getElementById('toast-msg');
+            msg.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 4000);
+        }
+
+        // Contact Form Submit via Formspree
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const formData = new FormData(contactForm);
+            
+            try {
+                const response = await fetch('https://formspree.io/f/xnjrlaan', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    showToast('Message sent successfully! We\'ll get back to you soon.');
+                    contactForm.reset();
+                } else {
+                    showToast('Oops! Something went wrong. Please try again or WhatsApp us.');
+                }
+            } catch (error) {
+                showToast('Network error. Please try again or message us on WhatsApp.');
+            }
+        });
+
+        // Newsletter Submit
+        function handleNewsletter(e) {
+            e.preventDefault();
+            showToast('Subscribed! Check your inbox for a welcome email.');
+            e.target.reset();
+        }
+
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section > div').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
